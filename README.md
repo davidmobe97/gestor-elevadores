@@ -2,9 +2,9 @@
 
 Aplicación web **Full Stack** para que una empresa instaladora lleve el control de los **elevadores de automoción** que monta en talleres: clientes, equipos instalados, **revisiones anuales obligatorias** e **incidencias** (averías).
 
-**Backend:** .NET 10 · ASP.NET Core Web API · Entity Framework Core
-**Frontend:** Angular 22 (componentes standalone y signals)
-**Seguridad:** JWT con roles
+- **Backend:** .NET 10 · ASP.NET Core Web API · Entity Framework Core
+- **Frontend:** Angular 22 (componentes standalone y signals)
+- **Seguridad:** JWT con roles
 
 > El proyecto nace de mi experiencia real como electromecánico montando elevadores de dos y cuatro columnas, de tijera y de parking. Resuelve un problema que conozco de primera mano: saber qué equipos tienen la revisión vencida y qué averías están pendientes.
 
