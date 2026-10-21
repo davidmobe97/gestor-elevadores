@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { ClienteDetalle, TEXTO_TIPO, TipoElevador } from '../../core/modelos';
 import { textoError } from '../../core/errores';
+import { AuthService } from '../../core/auth.service';
 import { Etiqueta } from '../../compartido/etiqueta';
 
 /** Ficha de un taller con sus elevadores y alta de elevadores nuevos. */
@@ -21,10 +22,12 @@ import { Etiqueta } from '../../compartido/etiqueta';
           <h1>{{ c.nombreTaller }}</h1>
           <p class="subtitulo">{{ c.poblacion }} ({{ c.provincia }}) · cliente desde {{ c.fechaAlta | date: 'MMMM yyyy' }}</p>
         </div>
-        <div class="acciones">
-          <a class="boton boton--secundario" [routerLink]="['/clientes', c.id, 'editar']">Editar</a>
-          <button class="boton boton--peligro" (click)="borrar()">Borrar</button>
-        </div>
+        @if (auth.esAdmin()) {
+          <div class="acciones">
+            <a class="boton boton--secundario" [routerLink]="['/clientes', c.id, 'editar']">Editar</a>
+            <button class="boton boton--peligro" (click)="borrar()">Borrar</button>
+          </div>
+        }
       </div>
 
       <section class="tarjeta">
@@ -40,9 +43,11 @@ import { Etiqueta } from '../../compartido/etiqueta';
       <section class="tarjeta">
         <div class="cabecera">
           <h2>Elevadores ({{ c.elevadores.length }})</h2>
-          <button class="boton boton--pequeno" (click)="mostrarAlta.set(!mostrarAlta())">
-            {{ mostrarAlta() ? 'Cancelar' : '+ Añadir elevador' }}
-          </button>
+          @if (auth.esAdmin()) {
+            <button class="boton boton--pequeno" (click)="mostrarAlta.set(!mostrarAlta())">
+              {{ mostrarAlta() ? 'Cancelar' : '+ Añadir elevador' }}
+            </button>
+          }
         </div>
 
         @if (mostrarAlta()) {
@@ -97,6 +102,7 @@ import { Etiqueta } from '../../compartido/etiqueta';
 })
 export class ClienteDetallePagina implements OnInit {
   private readonly api = inject(ApiService);
+  protected readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder).nonNullable;
 

@@ -1,6 +1,8 @@
 using GestorElevadores.Api.Data;
 using GestorElevadores.Api.Dtos;
 using GestorElevadores.Api.Models;
+using GestorElevadores.Api.Seguridad;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,7 @@ public class RevisionesController(AppDbContext db, TimeProvider reloj) : Control
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<IActionResult> Borrar(int id)
     {
         var revision = await db.Revisiones.FindAsync(id);

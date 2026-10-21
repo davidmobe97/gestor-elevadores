@@ -1,6 +1,8 @@
 using GestorElevadores.Api.Data;
 using GestorElevadores.Api.Dtos;
 using GestorElevadores.Api.Models;
+using GestorElevadores.Api.Seguridad;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,6 +54,7 @@ public class ClientesController(AppDbContext db, TimeProvider reloj) : Controlle
     }
 
     [HttpPost]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<ActionResult<ClienteDetalleDto>> Crear(ClienteGuardarDto dto)
     {
         var cliente = new Cliente { FechaAlta = reloj.GetUtcNow().UtcDateTime };
@@ -65,6 +68,7 @@ public class ClientesController(AppDbContext db, TimeProvider reloj) : Controlle
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<IActionResult> Actualizar(int id, ClienteGuardarDto dto)
     {
         var cliente = await db.Clientes.FindAsync(id);
@@ -76,6 +80,7 @@ public class ClientesController(AppDbContext db, TimeProvider reloj) : Controlle
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<IActionResult> Borrar(int id)
     {
         var cliente = await db.Clientes.Include(c => c.Elevadores).FirstOrDefaultAsync(c => c.Id == id);

@@ -5,6 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApiService } from '../../core/api.service';
 import { ClienteResumen } from '../../core/modelos';
 import { textoError } from '../../core/errores';
+import { AuthService } from '../../core/auth.service';
 
 /** Listado de talleres con buscador. */
 @Component({
@@ -16,7 +17,7 @@ import { textoError } from '../../core/errores';
         <h1>Clientes</h1>
         <p class="subtitulo">Talleres con elevadores instalados</p>
       </div>
-      <a class="boton" routerLink="/clientes/nuevo">+ Nuevo cliente</a>
+      @if (auth.esAdmin()) { <a class="boton" routerLink="/clientes/nuevo">+ Nuevo cliente</a> }
     </div>
 
     <div class="tarjeta">
@@ -57,6 +58,7 @@ import { textoError } from '../../core/errores';
 })
 export class Clientes implements OnInit {
   private readonly api = inject(ApiService);
+  protected readonly auth = inject(AuthService);
 
   protected readonly clientes = signal<ClienteResumen[]>([]);
   protected readonly cargando = signal(true);

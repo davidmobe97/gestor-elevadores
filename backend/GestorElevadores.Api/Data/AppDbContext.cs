@@ -12,6 +12,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Elevador> Elevadores => Set<Elevador>();
     public DbSet<Incidencia> Incidencias => Set<Incidencia>();
     public DbSet<Revision> Revisiones => Set<Revision>();
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
@@ -60,6 +61,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithMany(e => e.Revisiones)
             .HasForeignKey(r => r.ElevadorId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Usuarios: email único y rol guardado como texto.
+        modelBuilder.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
+        modelBuilder.Entity<Usuario>().Property(u => u.Rol).HasConversion<string>().HasMaxLength(20);
 
         DatosDemo.Cargar(modelBuilder);
     }

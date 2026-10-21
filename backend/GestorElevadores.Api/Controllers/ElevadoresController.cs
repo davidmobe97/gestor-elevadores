@@ -1,6 +1,8 @@
 using GestorElevadores.Api.Data;
 using GestorElevadores.Api.Dtos;
 using GestorElevadores.Api.Models;
+using GestorElevadores.Api.Seguridad;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,6 +62,7 @@ public class ElevadoresController(AppDbContext db, TimeProvider reloj) : Control
     }
 
     [HttpPost]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<ActionResult<ElevadorDetalleDto>> Crear(ElevadorGuardarDto dto)
     {
         var error = await Validar(dto, idActual: null);
@@ -74,6 +77,7 @@ public class ElevadoresController(AppDbContext db, TimeProvider reloj) : Control
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<IActionResult> Actualizar(int id, ElevadorGuardarDto dto)
     {
         var elevador = await db.Elevadores.FindAsync(id);
@@ -88,6 +92,7 @@ public class ElevadoresController(AppDbContext db, TimeProvider reloj) : Control
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = Roles.Administrador)]
     public async Task<IActionResult> Borrar(int id)
     {
         var elevador = await db.Elevadores.FindAsync(id);

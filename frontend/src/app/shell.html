@@ -13,6 +13,17 @@
       }
     </nav>
 
+    @if (auth.usuario(); as u) {
+      <div class="usuario">
+        <span class="usuario__avatar">{{ u.nombre.charAt(0) }}</span>
+        <div>
+          <strong>{{ u.nombre }}</strong>
+          <small>{{ u.rol === 'Administrador' ? 'Administrador' : 'Técnico' }}</small>
+        </div>
+        <button type="button" (click)="auth.logout()" title="Cerrar sesión" aria-label="Cerrar sesión">⎋</button>
+      </div>
+    }
+
     <p class="pie">Proyecto de portfolio<br>.NET 10 · Angular 22</p>
   </aside>
 

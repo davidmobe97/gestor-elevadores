@@ -1,18 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
-/** Estructura general: menú lateral + contenido de la página actual. */
+/** Raíz de la aplicación: solo muestra la ruta actual (login o Shell). */
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  imports: [RouterOutlet],
+  template: '<router-outlet />',
 })
-export class App {
-  protected readonly menu = [
-    { ruta: '/panel', texto: 'Panel', icono: '▦' },
-    { ruta: '/clientes', texto: 'Clientes', icono: '⌂' },
-    { ruta: '/elevadores', texto: 'Elevadores', icono: '⇕' },
-    { ruta: '/incidencias', texto: 'Incidencias', icono: '⚠' },
-  ];
-}
+export class App {}
