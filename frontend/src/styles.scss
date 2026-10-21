@@ -97,7 +97,13 @@ h2 { font-size: 1.15rem; margin: 0 0 1rem; }
   th { color: var(--suave); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; }
   tbody tr:hover { background: #f8fafc; }
 }
-.tabla-scroll { overflow-x: auto; }
+.tabla-scroll { overflow-x: auto; max-width: 100%; }
+
+// En móvil las tablas se compactan y se desplazan dentro de su tarjeta.
+@media (max-width: 600px) {
+  .tabla th, .tabla td { padding: .55rem .4rem; font-size: .9rem; }
+  .tarjeta { padding: 1rem; }
+}
 
 // Formularios
 .formulario {

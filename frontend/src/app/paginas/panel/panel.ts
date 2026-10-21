@@ -82,7 +82,7 @@ import { Etiqueta } from '../../compartido/etiqueta';
     }
   `,
   styles: `
-    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
     .kpi {
       background: var(--tarjeta); border: 1px solid var(--borde); border-radius: var(--radio);
       padding: 1.1rem 1.25rem; display: flex; flex-direction: column; color: var(--texto); text-decoration: none !important;
@@ -94,7 +94,7 @@ import { Etiqueta } from '../../compartido/etiqueta';
       &--alerta { border-left: 4px solid var(--peligro); }
     }
     .columnas { display: grid; grid-template-columns: 3fr 2fr; gap: 1.5rem; }
-    .columnas .tarjeta { margin: 0; }
+    .columnas .tarjeta { margin: 0; min-width: 0; }
     .incidencia {
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       padding: .7rem 0; border-bottom: 1px solid var(--borde); color: var(--texto); text-decoration: none !important;

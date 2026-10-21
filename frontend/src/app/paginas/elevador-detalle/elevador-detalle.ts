@@ -126,7 +126,7 @@ import { CerrarIncidencia } from '../../compartido/cerrar-incidencia';
   `,
   styles: `
     .columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
-    .columnas .tarjeta { margin: 0; }
+    .columnas .tarjeta { margin: 0; min-width: 0; }
     .tarjeta .cabecera { margin-bottom: 1rem; h2 { margin: 0; } }
     .revision {
       background: var(--tarjeta); border: 1px solid var(--borde); border-left: 4px solid var(--ok);
