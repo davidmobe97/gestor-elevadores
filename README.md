@@ -1,5 +1,9 @@
 # Gestor de mantenimiento de elevadores
 
+[![CI](https://github.com/davidmobe97/gestor-elevadores/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmobe97/gestor-elevadores/actions/workflows/ci.yml)
+![.NET 10](https://img.shields.io/badge/.NET-10-512BD4)
+![Angular 22](https://img.shields.io/badge/Angular-22-DD0031)
+
 Aplicación web **Full Stack** para que una empresa instaladora lleve el control de los **elevadores de automoción** que monta en talleres: clientes, equipos instalados, **revisiones anuales obligatorias** e **incidencias** (averías).
 
 - **Backend:** .NET 10 · ASP.NET Core Web API · Entity Framework Core
