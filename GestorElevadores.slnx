@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/GestorElevadores.Api/GestorElevadores.Api.csproj" />
+    <Project Path="backend/GestorElevadores.Tests/GestorElevadores.Tests.csproj" />
+  </Folder>
+</Solution>
