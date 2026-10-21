@@ -13,6 +13,19 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Incidencia> Incidencias => Set<Incidencia>();
     public DbSet<Revision> Revisiones => Set<Revision>();
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        // SQLite no guarda la zona horaria. Todas las fechas con hora se guardan en UTC
+        // y al leerlas se marcan como UTC, para que el JSON lleve la "Z" final
+        // y Angular las convierta bien a la hora de España.
+        configurationBuilder.Properties<DateTime>().HaveConversion<FechaUtcConverter>();
+        configurationBuilder.Properties<DateTime?>().HaveConversion<FechaUtcConverter>();
+    }
+
+    private sealed class FechaUtcConverter() : Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter<DateTime, DateTime>(
+        guardar => guardar.Kind == DateTimeKind.Utc ? guardar : guardar.ToUniversalTime(),
+        leer => DateTime.SpecifyKind(leer, DateTimeKind.Utc));
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Guardar los enums como texto ("Tijera") en vez de números (2):
